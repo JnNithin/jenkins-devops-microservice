@@ -60,13 +60,16 @@ pipeline {
 				}
 			}
 		}
-		stage ('Push Docker Image') {
+		stage('Push Docker Image') {
 			steps {
-					docker.withRegistry('', 'dockerhub') {
-						dockerImage.push();
+				script {
+					docker.withRegistry( '', 'dockerhub' ) {
+						dockerImage.push()
 						dockerImage.push('latest')
 					}
+				}
 			}
+			
 		}
 
 	} 
